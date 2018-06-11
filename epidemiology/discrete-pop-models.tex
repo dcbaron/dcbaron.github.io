@@ -1,0 +1,250 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{parskip}
+
+\newcommand{\newc}{\newcommand}
+\newc{\lrp}[1]{\left(#1\right)}
+\newc{\lrb}[1]{\left[#1\right]}
+\newc{\al}[1]{\begin{align*}#1\end{align*}}
+\newc{\ddx}{\frac{\mathrm{d}}{\mathrm{d}{x}}}
+\newc{\f}[1]{r#1(1-#1)}
+\newc{\verts}[1]{\left\lvert#1\right\rvert}
+
+
+\title{Some Results for Discrete Population Models}
+\author{Daniel Baron}
+
+\begin{document}
+
+\maketitle
+
+\section{2.4.6}
+Consider the second-iterate map $f^2$ of the logistic map $f(x)=\f{x}.$ 
+
+\subsection*{(a)} We have
+\al{%\begin{align*}
+f^2(x)&=f(f(x))\\
+&=r\left(\f{x}\right)\left(1-\f{x}\right) \\
+&=-r^2\lrp{rx^4-2rx^3+\lrp{r+1}x^2-x}
+.}%\end{align*}
+
+\subsection*{(b)} To find the fixed points of $f^2$, we must solve $f^2(x)-x=0$. We already know that $x_0=0$ and $x_1=\frac{r-1}{r}$ are solutions; factoring out the corresponding linear factors and assuming $r\neq0$, we see that the remaining fixed points are the solutions to
+$$
+r^2x^2-(r^2+r)x+r+1=0,$$
+and thus
+$$x_2,x_3=\frac{r+1\pm\sqrt{r^2-2r-3}}{2r}.
+\quad\text{(respectively)}$$
+These are the points of a two-cycle in $f$, and they are real and distinct only when $r^2-2r-3>0$: for our purposes, when $r>3$.
+
+\subsection*{(c)} The derivative of $f^2$ is easily computed from the expanded polynomial expression:
+$$\ddx{f^2(x)}=-r^2\lrp{4rx^3-6rx^2+2\lrp{r+1}x-1}.$$
+We also note that by the chain rule, $\ddx{f^2(x)}=f'(f(x))f'(x).$ 
+
+\subsection*{(d)}The two-cycle we found in (b) is stable if $|\ddx{f^2(x_2)}|$ and $|\ddx{f^2(x_3)}|$ are less than one. In fact, either inequality implies the other, for (WLOG) if the sequence $\{y_{2n}=f^{2n}(y_0)\}$ converges to $x_2$, then $y_{2n+1}\to f(x_2)=x_3$. So we compute
+\al{
+\ddx{f^2(x_2)} &= f'(f(x_2))f'(x_2)\\
+&= f'(x_3)f'(x_2)\\
+&= (r-2rx_3)(r-2rx_2)\\
+&= r^2(1-2(x_2+x_3)+4x_2x_3).
+}
+From part (c) we have $x_2+x_3={\frac{r+1}{r}}$ and
+\al{
+\quad x_2x_3 &=\frac{(r+1)^2-(r^2-2r-3)}{4r^2}\\
+&=\frac{r+1}{r^2}.}
+So the derivative becomes
+\al{
+r^2(1-2(x_2+x_3)+4x_2x_3) &= r^2-2r(r+1)+4(r+1)\\
+&= -r^2+2r+4.
+}
+This is less than 1 for $r>3$ and greater than -1 for $r<1+\sqrt6$; accordingly, the two-cycle is stable when $r$ is in that range. 
+
+
+\section{2.4.7} 
+Consider the fourth-iterate map $f^4$ of the logistic map  $f(x)=\f{x}$.
+
+\subsection*{(b)} (see attachment)
+
+As $f^4$ is a $16^{\text{th}}$ degree polynomial, it does not bear copying out here, nor is it easily manipulated by hand. Using the computer algebra system SymPy, I constructed the symbolic polynomial expressions for $f^4$ and $g=(f^4-x)/(f^2-x)$. The roots of the latter polynomial are fixed points of $f^4$ but not of $f^2$ or $f$; that is, they are the points of four-cycles in $f$.
+
+I then made a function \newc{\mv}{\mathrm{minval}} $\mv(r)$ to approximate the minimum value taken by $g(x)$ on our interval of interest, $0<x<1$, for a given value of $r$. This function is rather a blunt instrument: I could have used the symbolic expression for $g$ to compute its derivative and find extrema in the usual fashion, but even the derivate of $g$ has degree 11 and was beyond the capabilities of any symbolic rootfinding algorithms I could find. Numeric rootfinding on $g'$ did not seem to offer any immediate advantage over numeric minimum-hunting on $g$.
+
+Based on the discussion in class and the observation that the two-cycle becomes unstable when $r>1+\sqrt6$, I conjectured that the nondegenerate four-cycle would appear when r exceeded this value. Indeed, my computations confirm that 
+$$\mv(1+\sqrt6-\epsilon)<\mv(1+\sqrt6)\approx0<\mv(1+\sqrt6+\epsilon),\quad(\epsilon>0)$$
+so that $g$ (and thus $f^4-x$) has real roots when $r$ exceeds $1+\sqrt6$, so far as I was able to test.
+
+I also performed a bisection search for other solutions to $\mv(r)=0$ with $0<r<4$; as expected, all tests converged to $r\approx 1+\sqrt6$.
+
+\subsection*{(c)}
+The four-cycle $x_1,x_2,x_3,x_4$ is stable when $|\ddx f^4(x_i)|<1$ for all $i$. As in (2.4.6(d)), we need only check one of the points. The attached SymPy script uses a bisection search to find a numerical solution $1+\sqrt6<r<4$ to $|\ddx f^4(x^*(r))|-1=0$, where $x^*(r)$ is the first (i.e., least) root of the polynomial $g=(f^4-x)/(f^2-x)$.
+
+It turns out that $r\approx r_0= 3.5440909464613215$ is the only such solution. Thus $|\ddx f^4(x_i)|<1,$ and the four-cycle is stable, when $1+\sqrt6<r<r_0$.
+
+\section{2.4.8}
+The Breverton-Holt map is given by 
+\al{
+f(x_{n+1}) &= \frac{rx_n}{1+\frac{r-1}{K}x_n}\quad (r,K>0)\\
+&=  \frac{rKx_n}{K+\lrp{r-1}x_n}.}
+
+\textbf{Claim.} The closed-form solution $x_{n}=g(n)$ is given by
+\al{
+g(n)&=\frac{r^nx_0}{1+\frac{r^n-1}{K}x_0}\\
+&=\frac{r^nKx_0}{K+\lrp{r^n-1}x_0}.}
+
+\textbf{Proof (1).} Substitute $u_n=1/x_n$ and $T=\frac{r-1}{rK}.$ We then have \newc{\thing}{\lrp{\frac{1}{r}}}
+\al{
+u_{n+1}&=\frac{K+\lrp{r-1}x_n}{rKx_n}\\
+&=\frac{u_n}{r}+\frac{r-1}{rK}\\
+&=\frac{u_n}{r}+T\\
+&=\frac{\frac{u_{n-1}}{r}+T}{r} +T\\
+&\ \ \vdots\\
+&=\frac{u_{n+1-k}}{r^k}+T\lrp{\thing^{k-1}+\thing^{k-2}+\cdots+1}\\
+&\ \ \vdots\\
+&=\frac{u_0}{r^{n+1}}+T\lrp{\thing^{n}+\thing^{n-1}+\cdots+1}\\
+&=\frac{u_0}{r^{n+1}}+T\lrp{\frac{1-r^{-n-1}}{1-r^{-1}}}\\
+&=\frac{u_0}{r^{n+1}}
+	+ \lrp{\frac{r-1}{rK}}\lrp{\frac{r^{n+1}-1}{\lrp{r-1}r^n}}\\
+&=\frac{Ku_0+r^{n+1}-1}{r^{n+1}K}\\
+&=\frac{K+\lrp{r^{n+1}-1}x_0}{r^{n+1}Kx_0}\\
+&=\frac{1}{g(n+1)},
+}
+so that $x_{n+1}=g(n+1).$ \newc{\qed}{\rule{.5em}{.5em}}\qed
+
+\textbf{Proof (2).} More formally, we induct on $n$. When $n=0$, we have
+$$g(n)=\frac{r^0Kx_0}{K+\lrp{r^0-1}x_0}=x_0,$$
+so $g(n)=x_n$ in the base case. 
+
+Now let $n\geq0$ and suppose that $g(n)=x_{n}$. We then have
+\al{
+x_{n+1}	&= \frac{rKx_{n}}{K+\lrp{r-1}x_{n}} \\
+		&= \frac{rKx_{n}}{K+\lrp{r-1}g(n)} \\
+		&= \frac{rx_{n}}
+			{1+\lrp{r-1}
+				\frac{r^nx_0}{K+\lrp{r^n-1}x_0}
+			}\\
+		&= \frac{rx_{n}\lrp{K+\lrp{r^n-1}x_0}}
+			{K+\lrp{r^n-1+\lrp{r-1}r^n}x_0} \\
+		&= \frac{rx_{n}\lrp{K+\lrp{r^n-1}x_0}}
+			{K+\lrp{r^{n+1}-1}x_0} \\
+		&= \frac{r^{n+1}Kx_0}{K+\lrp{r^{n+1}-1}x_0} \\
+		&= g(n+1).
+}
+By induction, $x_n=g(n)$ for all $n$. \qed
+
+\section{2.4.10}
+Consider the tent map, given by
+\al{
+x_{n+1}=f(x_n)=  \begin{cases} 
+      \mu x &\text{for }0\leq x\leq 0.5,\\
+      \mu(1-x)&\text{for }0.5< x\leq 1.
+   \end{cases}
+}
+\subsection*{(a)} (See attachment)
+\subsection*{(b)}
+On the left-hand side of the domain, we solve $x=\mu x$ to find the fixed point $x=0$ (stable when $|\mu|<1$). If $\mu=1$, then \emph{every} point $x\leq0.5$ is a fixed point. Each point in this class is technically unstable, for if $x_0=x+\epsilon$ then the sequence $\lrp{x_n}$ does not converge to $x$; but of course the sequence does converge to $x+\epsilon$, so the usual concept of stability is not very meaningful in this case.
+
+On the right, we solve $x=\mu(1-x)$ and find the fixed point $x=\frac{\mu}{\mu+1}$. This value is always less than one, but is greater than 0.5 only when $\mu>1$. It follows that this fixed point is never stable.
+
+\subsection*{(c)}
+The orbits of period two correspond to pairs of fixed points of $f^2(x)$. Every nondegenerate 2-cycle has a point on the right side of the domain (for if $x_0,x_1,x_2\leq0.5$, then $x_2=\mu^2x_0=x_0$ only if $x_0=0$ or $\mu=1$), so it suffices to find those points. We have
+\al{
+f^2(x)=
+	\begin{cases}
+	\mu-\mu^2(1-x)
+		&\text{ for }0.5 < x <\min\{1,1-\frac{1}{2\mu}\},\\
+	\mu^2(1-x)
+		&\text{ for }1-\frac{1}{2\mu} \leq x \leq 1.
+	\end{cases}
+}
+
+For the first ``piece'', the only fixed point is $x=\frac{\mu}{\mu+1}$; this is the fixed point of the first-iterate map and represents a degenerate 2-cycle.
+
+In the remaining part of the domain, $\mu^2(1-x)-x=0$ has the solution $x=\frac{\mu^2}{\mu^2+1}$ when this value is at least $1-\frac{1}{2\mu}$. Solving for $\mu$, we find
+\al{
+&\frac{\mu^2}{\mu^2+1}\geq \frac{2\mu-1}{2\mu}\\
+\implies & 2\mu^3 \geq 2\mu^3-\mu^2+2\mu-1 \\
+\implies &  \mu^2-2\mu+1 \geq 0 \\
+\implies &  \mu \geq 1.
+}
+(For example, with $\mu=2$, we get the orbit $\frac{4}{5},\frac{2}{5},\frac{4}{5},\ldots$.) Notice that $\ddx f^2(x)=-\mu^2$ in this region, so the two-cycle is never stable.
+
+\subsection*{(d)}
+In a search for a 3-cycle, the following lemma will simplify things enormously:
+
+\textbf{Lemma.} The $n^{\text{th}}$ iterate of the tent map $f$ with $\mu=2$ is given by
+$$f^n(x)=f(2^{n-1}x \mod1)$$
+for all $n>0$.
+
+\textbf{Proof.} We induct on $n$. Clearly,
+$$ f^1(x)=f(x)= f(2^0x \mod1).$$
+Furthermore, for $x\leq0.5$ we have 
+$$f^2(x)=f(f(x))=f(2x)=f(2x\mod1),$$
+while for $x>0.5$
+\al{
+f^2(x)
+	&=f(2(1-x))\\
+	&=f(1-2(1-x))\\
+	&=f(2x-1)\\
+	&=f(2x\mod1).
+}
+So the claim holds for $n\leq2$.
+
+Now suppose that $n>2$ and $f^{k}(x)=f(2^{k-1}x \mod1)$ for all $1\leq k<n$. We then have, for all $x$,
+\al{
+f^n(x) &= f(f^{n-1}(x))\\
+&= f(f(2^{n-2}x \mod1))\\
+&= f^2(2^{n-2}x \mod1))\\
+&= f(2^{n-1}x \mod1)).
+}
+So the claim holds for all $n$. \qed
+
+Armed with this lemma, we see that any point on a 3-cycle will be a solution to $g(x)=f(4x\mod1)=x$. With $x<1/8$, we have $g(x)=8x$; no good. With $1/8<x<1/4$, we have $g(x)=2(1-4x)$ and we find the fixed point $x=2/9$, which gives us the cycle $\frac{2}{9},\frac{4}{9},\frac{8}{9},\frac{2}{9},\ldots$.
+
+ 
+\section{2.4.14}
+
+Consider the model for infection spread given by
+$$I_0=1,\quad I_{n+1}=I_n+kI_n(N-I_n).$$
+\subsection*{(a)}
+This is the (unsimplified) logistic model with nontrivial equilibrium $I^*=N$. For $0< kN < 2$, we have
+$$-1<\frac{\mathrm{d}}{\mathrm{d}I}\lrp{I+kI(N-I)}=kN+1-2kI^*=1-kN<1,$$
+so the equilibrium is stable: \emph{everyone} eventually gets sick.
+
+\subsection*{(b)}
+To account for recovery, assume each individual is sick for exactly $d$ days, can infect others during this period, and is immune after recovery. For each day $n$, let $I_n$ be the number of sick people on that day, let $J_n$ be the number of \emph{new} cases (that is, the number of people whose first day sick is day $n$), and let $P_n$ be the remaining susceptible population. The new model is then
+\al{
+J_0 = 1,\quad    &J_{n+1} = kI_nP_n; \\
+I_0 = J_0,\quad    &I_{n+1} = I_n+J_{n+1}-J_{n+1-d}; \\
+P_0 = N-J_0,\quad    &P_{n+1} = P_n-J_{n+1}.
+}
+Thus, the rate of new infections is unchanged from the old model; each new case decrements the susceptible population; and each disease victim is removed from the count of sick people after $d$ days sick.
+
+\section{}
+\subsection*{(a)}
+(see attachment)
+\subsection*{(b)}
+The Riker model is given by $x_{n+1}=f(x_n)=x\exp\lrb{r(1-\frac{x}{k})}$. Denote $y=f(x)$ and $h(x)=r(1-\frac{x}{k})$. Then $y=xe^{h(x)}$ and $f^2(x)=f(y)=xe^{h(x)+h(y)}$.
+
+If $x^*$ and $y^*=f(x^*)$ are the points of a two-cycle, then $x^*=x^*e^{h(x^*)+h(y^*)}$, so that $h(x^*)+h(y^*)=0.$ We then have
+\al{
+0&=h(x^*)+h(y^*)\\
+ &=r\lrp{2-\frac{1}{k}\lrp{x+y}}\\
+\implies\quad x+y&=2k.}
+
+\newc{\xs}{x^*}
+The derivative of $f^2$ at $x^*$ is given by
+\al{
+\lrp{\ddx f^2}(x^*)&=\lrp{1+xh'(\xs)+xh'(y^*)f'(\xs)}\exp\lrb{h(\xs)+h(y^*)}\\
+&=1-\frac{r}{k}\xs-\frac{r}{k}\xs\lrp{1-\frac{r}{k}\xs}e^{h(x)}\\
+&=1-\frac{r}{k}\lrp{\xs+y^*-\frac{r}{k}\xs y^*}\\
+&=1-\frac{r}{k}\lrp{2k-\frac{r}{k}\xs y^*}\\
+&=1-2r +\frac{r^2}{k^2}\xs y^*\\
+&\leq1-2r +\frac{r^2}{k^2}k^2.
+}
+So the derivative at $\xs$ is bounded by the derivative at the fixed point $x=k$, which by the above quadratic is less than 1 while $r<2$. This of course is the value at which a two-cycle appears.
+
+
+
+
+
+
+\end{document}
