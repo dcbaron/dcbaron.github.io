@@ -2,15 +2,46 @@
   <head>
     <title>Baron Mathematics</title>
     <style>
-      p {max-width: 50em;}
+      @import url('https://fonts.googleapis.com/css?family=Cabin|Cormorant:700%display=swap');
+      body {
+        margin-left: 4em;
+        background-color: hsl(0,0%,97%);
+        color: hsl(275,4%,35%);
+        }
+      h1,h2, h3, .contactinfo {
+        font-family:'Cormorant', cursive;
+      }
+      h1 {
+        font-size:400%;
+        margin-bottom:0.25em;
+      }
+      h2 {
+        font-size:300%;
+        margin-bottom:0.5em;
+      }
+      h3 {font-size:200%;}
+      .contactinfo {
+        font-size:300%;
+        margin-bottom:0.25em;}
+      p,ul {
+        max-width: 40em;
+        font-family:'Cabin',sans-serif;
+      }
+      .contactsmall {
+        font-size:67%;
+      }
+      .intro {font-size:125%;}
 	  </style>
+    <meta name="format-detection" content="telephone=no"/>
   </head>
+
   <body>
     <h1>Baron Mathematics</h1>
-	  <h2>Need a tutor?</h2>
-	  <p>I'm a friendly, patient tutor with a master's degree in math and 5 years experience.</p>
-	  <p>My specialities:
-      <ul>
+    <hr>
+	  <h2 style="margin-top:0.25em">Need a tutor?</h2>
+	  <p class="intro">I'm a friendly, patient tutor with a master's degree in math and 5 years experience. I work in-person in the Seattle, WA area, and online anywhere you need me to be.</p>
+	  <p class="intro">My specialities:
+      <ul class="intro">
         <li>High school math and science</li>
         <li>Test prep:
           <ul>
@@ -27,19 +58,22 @@
         <li>Analytics: Excel and SQL</li>
       </ul>
     </p>
-    <h2>Daniel Baron, MS</h2>
-    <h2>Tutor and Consulting Mathematician</h2>
-    <p class='contactinfo'>
-      520-241-4060
-      <br><a href="daniel@baronmath.com">daniel@baronmath.com</a>
-    </p>
-  <p>I work in-person in the Seattle, WA area, and online anywhere you need me to be.</p>
+    <div class="contactinfo">
+      Daniel Baron, MS
+      <span class="contactsmall">
+        <br>Tutor & Consulting Mathematician
+        <br>520.241.4060
+        <br>daniel@baronmath.com
+      </span>
+    </div>
+    <hr>
+    
     <p> This is my website. </p>
 
     <p>Soon there will be things here. Things like math things, and science things, and philosophical things. 
       I've been really interested lately in the ways we use math to make art and music---look for some 
       explorations of those topics here in the coming weeks!</p>
-    <h3>Things that are be here</h3>
+    <h3>Things that are, or will be, here:</h3>
 	<ul>
 	  <li><a href="https://github.com/dcbaron/Epidemiology">Mathematical and computational models in epidemiology</a> (SIR, etc)</li>
 	  <li>Population models</li>
