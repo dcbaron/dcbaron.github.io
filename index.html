@@ -4,6 +4,7 @@
     <style>
       @import url('https://fonts.googleapis.com/css?family=Cabin|Cormorant:700%display=swap');
       body {
+        margin-left:4em;
         background-color: hsl(0,0%,97%);
         color: hsl(275,4%,35%);
         font-family:'Cabin',sans-serif;
@@ -30,7 +31,7 @@
       }
       .title {
         margin-bottom:0px;
-        font-size:400%;
+        font-size:360%;
       }
       
       .contactsmall {
@@ -77,50 +78,75 @@
       .main {
         margin-right: 18.9em; /* Same as the width of the sidebar */
         padding-right: 2em;
-        margin-left: 4em;
-        
         
       }
 
-      @media screen and (max-width: 1000px) {
-        .main {
-          /*color: red;*/
+      @media screen and (max-width: 999px) {
+        .sidebar h2, .sidebar p {
+          margin-bottom:5px;
+          margin-top:3px;
+        }
+        .sidebar ul {margin-top: 0px;}
+        body {
           margin-left:2em;
-          padding-right:1em;
-        }
-        .title {
-          font-size: 350%;
-        }
-        
-      }
-      
-      /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
-      @media screen and (max-height: 600px) {
-        .sidebar {
-          /*color: red; */
           font-size:90%;
-          padding-top: 0px;
         }
-        .sidebar h2, .sidebar p {margin-bottom:5px;margin-top:3px;}
+        .main {
+          padding-right:1em;
+          margin-right:20.5em;
+        }
+      } 
+      
+      
+      @media screen and (max-height: 600px) {
+        .sidebar { padding-top: 0px;}
+        .sidebartext {font-size:90%;}
+        .sidebar h2, .sidebar p {margin-bottom:5px; margin-top:3px;}
         .sidebar ul {margin-top: 0px;}
       }
       @media screen and (max-height: 480px) {
-        .sidebar {
-          /*color: blue; */
-          font-size:80%;
-        }
-        .sidebar h2, .sidebar p {margin-bottom:2px;margin-top:2px;}
+        body {font-size:90%}
+        .sidebar h2, .sidebar p {margin-bottom:2px; margin-top:2px;}
         .sidebar ul {margin-top: 0px;}
         .sidebar .contactinfo {padding-bottom:0.25em;padding-top:0.25em;}
       }
       @media screen and (max-height: 430px) {
-        .sidebar {
-          /*color: green; */
-          position: absolute;
-        }
+        .sidebar {position: absolute;}
         .sidebar h2, .sidebar p {margin-bottom:2px;margin-top:2px;}
         .sidebar ul {margin-top: 0px;}
         .sidebar .contactinfo {padding-bottom:0.25em;padding-top:0.25em;}
+      }
+      @media screen and (max-width: 768px) {
+        .sidebar {
+          max-width:100%;
+          width:100%;
+          position:static;
+        }
+        .main .contactinfo {display:None;}
+        .sidebar h2, .sidebar p {margin-bottom:5px;margin-top:3px;}
+        .sidebar ul {margin-top: 0px;}
+        body{margin-left:1em;font-size:90%;}
+        
+        .main {
+          padding-right:0px;
+          margin-right:0px;
+        }
+      }
+      
+      @media screen and (max-width: 480px) {
+        .title {font-size:11.3vw;}
+        h2 {font-size:
+        .sidebar {
+          max-width:100%;
+          width:100%;
+          position:static;
+        }
+        .main .contactinfo {display:None;}
+        .sidebar h2, .sidebar p {margin-bottom:5px;margin-top:3px;}
+        .sidebar ul {margin-top: 0px;}
+        body{margin-left:.5em;font-size:90%;}
+        
+        
       }
 	  </style>
     <meta name="format-detection" content="telephone=no"/>
@@ -129,10 +155,13 @@
   </head>
 
   <body>
+    <h1 class="title">Baron Mathematics</h1>
+      
     <div class="sidebar">
       <!-- Side navigation -->
+        <span class="sidebartext">
         <h2>Need a tutor?</h2>
-        <p>I'm a friendly, patient tutor with a master's degree in math and 5 years of experience. I work in-person in Seattle and Bremerton, and online anywhere you need me to be.</p>
+        <p>I'm a friendly, patient tutor with a master's degree in math and 5 years of experience.<br>I work in-person in Seattle and Bremerton, and online anywhere you need me to be.</p>
         <p style="font-size:110%;">My specialities:
           <ul style="font-size:110%;">
             <li>High school math & science</li>
@@ -165,11 +194,11 @@
         <a href="#">Services</a>
         <a href="#">Clients</a>
         <a href="#">Contact</a>-->
+        </span>
     </div>
 
     <!-- Page content -->
     <div class="main">
-      <h1 class="title">Baron Mathematics</h1>
       <div class="contactinfo">
         Daniel Baron, MS
         <span class="contactsmall">
