@@ -4,7 +4,7 @@
     <style>
       @import url('https://fonts.googleapis.com/css?family=Cabin|Cormorant:700%display=swap');
       body {
-        margin-left:4em;
+        margin-left:4%;
         background-color: hsl(0,0%,97%);
         color: hsl(275,4%,35%);
         font-family:'Cabin',sans-serif;
@@ -16,24 +16,26 @@
         font-size:280%;
         margin-bottom:0.5em;
       }
-      h3 {font-size:200%;}
+      h3 {
+        font-size:200%;
+      }
       .contactinfo {
         font-size:250%;
-        padding-bottom:0.5em;
-        padding-top:0.5em;
+        padding-top: 2vh;
+        padding-bottom: 2vh;
         margin-bottom:0.25em;
         line-height:70%;
         border-bottom: solid gray 2px;
         border-top: solid gray 2px;
       }
+      #titlecontact {margin-right:8em;}
       p,ul {
         max-width: 38em;
       }
       .title {
         margin-bottom:0px;
-        font-size:360%;
+        font-size:380%;
       }
-      
       .contactsmall {
         font-size:67%;
         line-height:90%;
@@ -41,25 +43,26 @@
       
       /* The sidebar menu */
       .sidebar {
-        /*height: 100%;  /*Full-height: remove this if you want "auto" height */
-        width: 17.9em; /* Set the width of the sidebar */
-        max-width:50%;
+        width: 18.9em; /* Set the width of the sidebar */
         position: fixed; /* Fixed Sidebar (stay in place on scroll) */
         z-index: 1; /* Stay on top */
         top: 0; /* Stay at the top */
         right: 0;
-        /*background-color: #111;  Black */
         overflow-x: hidden; /* Disable horizontal scroll */
-        padding-top: 20px;
-        padding-right:1em;
       }
-      .sidebar h2 {margin-top: 0.25em;}
-      .thing {
-        /*padding-left: 1em;*/
-        font-size:100%;
-        margin-top:0.4em
-        
+      .thing{
+        padding-top: 2vh;
       }
+      .sidebar h2 {
+        margin-top: 3vh;
+        margin-bottom: 2vh;
+      }
+      .sidebar p {
+        margin-top: 1.7vh;
+        margin-bottom: 1.7vh;
+      }
+      .sidebar ul {margin-top:0px;}
+      
       /* The navigation menu links */
       .sidebar a {
         padding: 6px 8px 6px 16px;
@@ -77,44 +80,15 @@
       /* Style page content */
       .main {
         margin-right: 18.9em; /* Same as the width of the sidebar */
-        padding-right: 2em;
-        
+        max-width: 38em;
+        padding-right:2%;
       }
-
       @media screen and (max-width: 999px) {
-        .sidebar h2, .sidebar p {
-          margin-bottom:5px;
-          margin-top:3px;
-        }
-        .sidebar ul {margin-top: 0px;}
-        body {
-          margin-left:2em;
-          font-size:90%;
-        }
-        .main {
-          padding-right:1em;
-          margin-right:20.5em;
-        }
+        body { font-size:90%; }
       } 
-      
-      
-      @media screen and (max-height: 600px) {
-        .sidebar { padding-top: 0px;}
-        .sidebartext {font-size:90%;}
-        .sidebar h2, .sidebar p {margin-bottom:5px; margin-top:3px;}
-        .sidebar ul {margin-top: 0px;}
-      }
-      @media screen and (max-height: 480px) {
+      @media screen and (max-height: 530px) {
         body {font-size:90%}
-        .sidebar h2, .sidebar p {margin-bottom:2px; margin-top:2px;}
-        .sidebar ul {margin-top: 0px;}
-        .sidebar .contactinfo {padding-bottom:0.25em;padding-top:0.25em;}
-      }
-      @media screen and (max-height: 430px) {
         .sidebar {position: absolute;}
-        .sidebar h2, .sidebar p {margin-bottom:2px;margin-top:2px;}
-        .sidebar ul {margin-top: 0px;}
-        .sidebar .contactinfo {padding-bottom:0.25em;padding-top:0.25em;}
       }
       @media screen and (max-width: 768px) {
         .sidebar {
@@ -122,31 +96,15 @@
           width:100%;
           position:static;
         }
-        .main .contactinfo {display:None;}
-        .sidebar h2, .sidebar p {margin-bottom:5px;margin-top:3px;}
-        .sidebar ul {margin-top: 0px;}
-        body{margin-left:1em;font-size:90%;}
-        
+        #titlecontact {display:None;}
+        body{font-size:90%;}
         .main {
           padding-right:0px;
           margin-right:0px;
         }
       }
-      
       @media screen and (max-width: 480px) {
         .title {font-size:11.3vw;}
-        h2 {font-size:
-        .sidebar {
-          max-width:100%;
-          width:100%;
-          position:static;
-        }
-        .main .contactinfo {display:None;}
-        .sidebar h2, .sidebar p {margin-bottom:5px;margin-top:3px;}
-        .sidebar ul {margin-top: 0px;}
-        body{margin-left:.5em;font-size:90%;}
-        
-        
       }
 	  </style>
     <meta name="format-detection" content="telephone=no"/>
@@ -162,23 +120,23 @@
         <span class="sidebartext">
         <h2>Need a tutor?</h2>
         <p>I'm a friendly, patient tutor with a master's degree in math and 5 years of experience.<br>I work in-person in Seattle and Bremerton, and online anywhere you need me to be.</p>
-        <p style="font-size:110%;">My specialities:
-          <ul style="font-size:110%;">
-            <li>High school math & science</li>
-            <li>Test prep:
-              <ul>
-                <li>SAT/PSAT</li>
-                <li>GRE</li>
-              </ul>
-            </li>
-            <li>Univeristy mathematics, statistics, &amp;&nbsp;sciences
-            </li>
-            <!--<li>GRE prep</li>-->
-            <li>Python programming</li>
-            <li>Data science & machine learning</li>
-            <li>Analytics: Excel and SQL</li>
-          </ul>
-        </p>
+        <p style="font-size:110%;">My specialities:</p>
+        <ul style="font-size:110%;margin-bottom:3vh;">
+          <li>High school math & science</li>
+          <li>Test prep:
+            <ul>
+              <li>SAT/PSAT</li>
+              <li>GRE</li>
+            </ul>
+          </li>
+          <li>Univeristy mathematics, statistics, &amp;&nbsp;sciences
+          </li>
+          <!--<li>GRE prep</li>-->
+          <li>Python programming</li>
+          <li>Data science & machine learning</li>
+          <li>Analytics: Excel and SQL</li>
+        </ul>
+      
         <div class="contactinfo">
           Daniel Baron, MS
           <span class="contactsmall">
@@ -198,8 +156,7 @@
     </div>
 
     <!-- Page content -->
-    <div class="main">
-      <div class="contactinfo">
+    <div class="contactinfo" id="titlecontact">
         Daniel Baron, MS
         <span class="contactsmall">
           <br>Tutor & Mathematician
@@ -209,6 +166,9 @@
           </div>
         </span>
       </div>
+    
+    <div class="main">
+      
       
       <p> This is my website. </p>
 
